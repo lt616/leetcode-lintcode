@@ -17,6 +17,7 @@ Given dividend = 100 and divisor = 9, return 11.
 
 		2. Use Bit operators 
 		<< | <<= increasing; >> | >>= decreasing. 
+*/ 
 
 public class Solution {
     /**
