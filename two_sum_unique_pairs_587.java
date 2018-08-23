@@ -50,4 +50,55 @@ public class Solution {
     } 
 } 
 
+/* Solution 02: 2-pointer */ 
+
+/* BEAT 100% SUBMISSIONS! */ 
+
+public class Solution {
+    /**
+     * @param nums: an array of integer
+     * @param target: An integer
+     * @return: An integer
+     */
+    public int twoSum6(int[] nums, int target) {
+        // write your code here 
+        
+        if (nums == null || nums.length == 0) 
+            return 0; 
+        
+        Arrays.sort(nums); 
+        
+        int first_ptr = 0, second_ptr = nums.length - 1; 
+        int sum = 0, count = 0; 
+        while (first_ptr < second_ptr) { 
+            sum = nums[first_ptr] + nums[second_ptr]; 
+            if (sum == target) { 
+                count ++;
+                
+                first_ptr ++; 
+                while (first_ptr < second_ptr && nums[first_ptr] == nums[first_ptr - 1]) {
+                    first_ptr ++; 
+                } 
+                
+                second_ptr --; 
+                while (second_ptr > first_ptr && nums[second_ptr] == nums[second_ptr + 1]) {
+                    second_ptr --; 
+                } 
+            } else if (sum < target) { 
+                first_ptr ++; 
+                while (first_ptr < second_ptr && nums[first_ptr] == nums[first_ptr - 1]) {
+                    first_ptr ++; 
+                } 
+            } else { 
+                second_ptr --; 
+                while (second_ptr > first_ptr && nums[second_ptr] == nums[second_ptr + 1]) {
+                    second_ptr --; 
+                }
+            }
+        } 
+        
+        return count; 
+    } 
+}
+
 
