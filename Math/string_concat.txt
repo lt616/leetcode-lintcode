@@ -1,0 +1,12 @@
+https://javarevisited.blogspot.com/2015/01/3-examples-to-concatenate-string-in-java.html 
+
+1. never use "+" in loop, will cause in large string garbage. 
+
+2. StringBuilder & StringBuffer 
+no temporary immediate string and save memory. 
+StringBuffer is for synchronized therefore some overhead. 
+
+3. String.concat() 
+
+Speed ranking: 
+StringBuilder > StringBuffer > String.concat() > "+" 
