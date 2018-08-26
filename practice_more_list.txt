@@ -1,4 +1,6 @@
-fast_power_140 
+powx_n_428 
 divide_two_integers_414 
 copy_books_437 
+remove_duplicate_numbers_in_array_521 
+
 
