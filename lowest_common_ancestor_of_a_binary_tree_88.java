@@ -37,7 +37,7 @@ Assume two nodes are exist in tree.
  * }
  */
 
-
+/* Solution 01: by myself, time complexity not good */ 
 public class Solution {
     /*
      * @param root: The root of the binary search tree.
