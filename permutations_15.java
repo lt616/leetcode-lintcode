@@ -46,17 +46,17 @@ public class Solution {
             is_visited[i] = false; 
         }
         
-        permuteDFS(nums, 0, buffer, is_visited); 
+        permuteDFS(nums, buffer, is_visited); 
         
         return res; 
     } 
     
-    private void permuteDFS(int[] nums, int index, List<Integer> buffer, boolean[] is_visited) {
+    private void permuteDFS(int[] nums, List<Integer> buffer, boolean[] is_visited) {
         if (buffer.size() == nums.length) {
             res.add(new ArrayList(buffer)); 
         } 
         
-        for (int i = index;i < nums.length;i ++) { 
+        for (int i = 0;i < nums.length;i ++) { 
             if (is_visited[i]) {
                 continue; 
             }
@@ -64,7 +64,7 @@ public class Solution {
             is_visited[i] = true; 
             buffer.add(nums[i]); 
             
-            permuteDFS(nums, index, buffer, is_visited); 
+            permuteDFS(nums, buffer, is_visited); 
             
             is_visited[i] = false; 
             buffer.remove(buffer.size() - 1); 
