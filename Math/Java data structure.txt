@@ -19,3 +19,6 @@ Queue queueA = new LinkedList();
 	queue.poll(); 
 	queue.offer(); 
 Queue queueB = new PriorityQueue(); 
+
+2. Priority Queue 
+Queue queue = new PriorityQueue(); 
