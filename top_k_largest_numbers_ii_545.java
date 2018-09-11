@@ -26,7 +26,6 @@ s.topk()
 >> return [1000, 100, 10]
 */ 
 
-/* Solution 01: priority queue */ 
 public class Solution { 
     
     Queue<Integer> pq; 
