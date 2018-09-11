@@ -11,4 +11,10 @@ alien_dictionary_901
 binary_tree_postorder_traversal_68 
 sequence_reconstruction_605 
 subset_17 
-
+word_break_ii_582 
+median_of_k_sorted_arrays_931 (binary search) 
+maximum_subarray_41 (sliding window) 
+submatrix_sum_405 ??? 
+kth_smallest_number_in_sort_matrix_401 
+minimum_size_subarray_406 
+number_of_islands_ii 
