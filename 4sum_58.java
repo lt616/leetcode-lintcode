@@ -18,6 +18,12 @@ Elements in a quadruplet (a,b,c,d) must be in non-descending order. (ie, a ≤ b
 The solution set must not contain duplicate quadruplets.
 */ 
 
+/* 
+	EASY WRONG POINTS: 
+		1. Sort array first of all. 
+		2. Fixed n - 2 numbers and do 2-sum. 
+*/ 
+
 public class Solution {
     /**
      * @param numbers: Give an array
