@@ -1,0 +1,8 @@
+1. Why ReactJS is different? 
+By contrast, React focuses exclusively on the creation of components, and has few (if any) opinions about an application’s architecture. This allows a developer an incredible amount of flexibility in choosing the architecture they deem “best” — though it also places the responsibility of choosing (or building) those parts on the developer. 
+
+By comparing and contrasting React with another library, not only can the candidate demonstrate a deep understanding of React, but also position themself as a potentially strong candidate. 
+
+e.g. The reason we chose ReactJS over Angulars 
+
+2. 

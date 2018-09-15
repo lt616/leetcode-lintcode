@@ -43,5 +43,10 @@ Hashtable: Synchronized, no null value
 Hashmap: unsynchronized, null ok 
 Hashset: no key only value 
 
+5. Deque 
+https://www.tutorialspoint.com/java/util/java_util_arraydeque.htm 
+
+Deque<Integer> dq = new ArrayDeque(); 
+
 
 
