@@ -17,4 +17,14 @@ maximum_subarray_41 (sliding window)
 submatrix_sum_405 ??? 
 kth_smallest_number_in_sort_matrix_401 
 minimum_size_subarray_406 
-number_of_islands_ii 
+number_of_islands_ii_434 
+4_sum_58 
+copy_list_with_random_pointer_105 
+subarray_sum_closest_139 
+kth_smallest_numbers_in_unsorted_array_461 
+linked_list_cycle_102 
+range_sum_query_mutable_840 (Binary Indexed Tree) 
+sliding_window_maximum_362 
+house_robber_ii_534 
+coins_in_line_394 
+gas_station_187 
