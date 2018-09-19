@@ -28,3 +28,6 @@ sliding_window_maximum_362
 house_robber_ii_534 
 coins_in_line_394 
 gas_station_187 
+stone_game_476 
+399_evaluate_division 
+
