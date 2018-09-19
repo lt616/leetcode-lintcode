@@ -17,52 +17,31 @@ Notice
 The solution is guaranteed to be unique.
 */ 
 
-public class Solution {
-    /**
-     * @param gas: An array of integers
-     * @param cost: An array of integers
-     * @return: An integer
-     */
-    public int canCompleteCircuit(int[] gas, int[] cost) {
-        // write your code here 
-        
-        if (gas == null || gas.length == 0 || cost == null || cost.length == 0) {
-            return -1; 
-        } 
-        
-        int[] left = new int[gas.length]; 
-        int sum = 0, max = -1, max_index = (gas[0] - cost[0] >= 0) ? -1 : -2; 
-        for (int i = 0;i < gas.length;i ++) {
-            left[i] = gas[i] - cost[i]; 
-            sum += left[i]; 
-            
-            if (sum < 0) {
-                sum = 0; 
-                max_index = i; 
-                continue; 
-            } 
-        } 
-        max_index ++; 
-        
-        if (max_index == -1) {
-            return max_index; 
-        } 
+/* 
+	EASY WRONG POINTS: 
+		1. If total gas >= total cost, then there must be a solution. 
+*/ 
 
-        sum = 0; 
-        for (int i = max_index;i < gas.length;i ++) {
-            sum += left[i]; 
-            if (sum < 0) { 
-                return -1; 
-            } 
-        } 
-        
-        for (int i = 0;i < max_index;i ++) {
-            sum += left[i]; 
-            if (sum < 0) { 
-                return -1; 
-            } 
-        } 
-        
-        return max_index; 
-    }
+public class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || cost == null || gas.length == 0 || cost.length == 0) {
+            return -1;
+        }
+
+        int sum = 0;
+        int total = 0;
+        int index = -1;
+
+        for(int i = 0; i<gas.length; i++) {
+            sum += gas[i] - cost[i];
+            total += gas[i] - cost[i];
+            if(sum < 0) {
+                index = i;
+                sum = 0;
+            }
+        }
+        return total < 0 ? -1 : index + 1;
+        // index should be updated here for cases ([5], [4]);
+        // total < 0 is for case [2], [2]
+    } 
 } 
