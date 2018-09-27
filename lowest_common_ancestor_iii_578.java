@@ -46,7 +46,10 @@ public class Solution {
      * @param A: A TreeNode
      * @param B: A TreeNode
      * @return: Return the LCA of the two nodes.
-     */
+     */ 
+    
+    boolean has_A, has_B; 
+    
     public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
         // write your code here 
         if (A == B) {
@@ -57,42 +60,35 @@ public class Solution {
             return null; 
         } 
         
-        DFS(root, A, B); 
+        has_A = false; 
+        has_B = false; 
         
-        return res; 
+        TreeNode ancestor = DFS(root, A, B); 
+        
+        return (has_A && has_B) ? ancestor : null; 
     } 
     
     private TreeNode DFS(TreeNode root, TreeNode A, TreeNode B) {
-        if (root == null) { 
-            //System.out.println(root.val); 
+        if (root == null) {
             return null; 
         } 
-        TreeNode right = DFS(root.right, A, B); 
+        
         TreeNode left = DFS(root.left, A, B); 
+        TreeNode right = DFS(root.right, A, B); 
         
-        if ((root == A && (left == B || right == B)) || (root == B && (left == A || right == A))) { 
-            res = root; 
-            return root; 
-        } 
-        
-        if ((left == A && right == B) || (left == B && right == A)) {
-            res = root; 
-
-            return root; 
-        } 
-        
-        if (root == A || root == B) {
-            return root; 
+        if (root == A || root == B) { 
+            if (root == A) {
+                has_A = true; 
+            } else {
+                has_B = true; 
+            } 
+            return root;      
         }
         
-        if (left != null) {
-            return left; 
+        if (left != null && right != null) { 
+            return root; 
         } 
         
-        if (right != null) {
-            return right; 
-        } 
-        
-        return null;         
+        return (left != null) ? left : right; 
     }
 } 
