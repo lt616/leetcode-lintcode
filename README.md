@@ -14,4 +14,4 @@ Already conquered:
 Currently fighting against: 
 * dynamic programming 
 
-
+Github link: https://github.com/lt616/leetcode-lintcode
