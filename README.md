@@ -1,5 +1,6 @@
 # leetcode-lintcode
 Algorithm is the soul of Computer Science! Enjoy Alogrithms everyday :) 
+
 Already conquered: 
 * string 
 * binary search
