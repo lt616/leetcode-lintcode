@@ -48,5 +48,10 @@ https://www.tutorialspoint.com/java/util/java_util_arraydeque.htm
 
 Deque<Integer> dq = new ArrayDeque(); 
 
+6. TreeMap 
+https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html 
+
+The implementation of red-black tree. The map is naturally sorted in the order of keys. 
+
 
 
