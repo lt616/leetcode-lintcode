@@ -11,130 +11,102 @@ set(key, value) - Set or insert the value if the key is not already present. Whe
 	EASY WRONG POINTS: 
 		
 
-class Node { 
+*/ 
+
+/* Solution 01: my best solution */ 
+class Node {
     int key; 
     int val; 
     Node next; 
-    public Node(int key, int val) { 
+    
+    public Node (int key, int val) {
         this.key = key; 
         this.val = val; 
         this.next = null; 
-    }
-}
+    } 
+} 
 
-public class LRUCache { 
-    
-    Map<Integer, Node> cache = new HashMap(); 
-    Map<Integer, Node> parent = new HashMap(); 
-    Node linked_list_first = null, linked_list_last = null; 
-    int cache_size, current_size; 
-    
-    /*
-    * @param capacity: An integer
-    */public LRUCache(int capacity) {
-        // do intialization if necessary 
-        cache_size = capacity; 
-    }
+class LRUCache { 
+    Node dummy, last; 
+    int capacity, size; 
+    Map<Integer, Node> preNodes; 
 
-    /*
-     * @param key: An integer
-     * @return: An integer
-     */
+    public LRUCache(int capacity) {
+        dummy = new Node(-1, 0); 
+        last = dummy; 
+        size = 0; 
+        preNodes = new HashMap<Integer, Node>(); 
+        
+        this.capacity = capacity; 
+    }
+    
     public int get(int key) {
-        // write your code here 
-        
-        if (! cache.containsKey(key)) { 
-            // System.out.println("MATCH"); 
+        if (! preNodes.containsKey(key)) {
             return -1; 
-        }
-
-        Node current = cache.get(key); 
-        int value = current.val; 
-        
-        if (linked_list_last == current) {
-            return value; 
         } 
         
-        if (linked_list_first == current) { 
-            parent.remove(current.next.key); 
-            linked_list_first = current.next; 
-            current.next = null; 
-        } else {
-            parent.put(current.next.key, parent.get(current.key)); 
-            // System.out.println(key); 
-            parent.get(key).next = current.next; 
-            current.next = null; 
-            parent.remove(current.key); 
-        }
-
-        linked_list_last.next = current; 
-        parent.put(current.key, linked_list_last); 
-        linked_list_last = current; 
+        moveToTail(key); 
         
-        return value; 
+        return preNodes.get(key).next.val; 
     }
-
-    /*
-     * @param key: An integer
-     * @param value: An integer 
-     * @return: nothing
-     */
-    public void set(int key, int value) {
-        // write your code here 
-
-        Node current; 
-        if (cache.containsKey(key)) {
-            /* remove current node */ 
-            current = cache.get(key); 
-            if (linked_list_last == current) {
-                current.val = value; 
-                cache.put(key, current); 
-                return; 
-            }
-            if (parent.containsKey(key)) { 
-                parent.get(key).next = current.next; 
-                parent.put(current.next.key, parent.get(key)); 
-                parent.remove(key); 
-            } else { 
-                parent.remove(current.next.key); 
-                linked_list_first = current.next; 
-                current.next = null; 
+    
+    public void put(int key, int value) { 
+        
+        if (! preNodes.containsKey(key)) { 
+            Node new_node = new Node(key, value); 
+            appendNode(new_node); 
+            size ++;      
+            if (size > capacity) {
+                removeFirstNode(); 
+                size --; 
             } 
-
-            current.val = value; 
-            cache.put(key, current); 
         } else {
-        
-            if (current_size == cache_size) { 
-                /* remove LRU element */ 
-                cache.remove(linked_list_first.key); 
-
-                linked_list_first = linked_list_first.next; 
-                if (linked_list_first != null) { 
-                    parent.remove(linked_list_first.key); 
-                } 
-                current_size --; 
-            } 
-            
-            current = new Node(key, value); 
-            cache.put(key, current); 
-            
-            current_size ++; 
+            moveToTail(key); 
+            preNodes.get(key).next.val = value; 
         }
+    } 
+    
+    private void moveToTail(int key) {
+        Node current, pre; 
+        pre = preNodes.get(key); 
+        current = pre.next; 
         
-        /* append new element */ 
-        if (linked_list_first == null) {
-            linked_list_first = current; 
-            linked_list_last = current; 
+        if (current == last) {
+            return; 
+        } 
+        
+        pre.next = current.next; 
+        if (pre.next == null) {
+            last = pre; 
         } else {
-            linked_list_last.next = current; 
-            parent.put(current.key, linked_list_last); 
-            linked_list_last = current; 
-        }
+            preNodes.put(pre.next.key, pre); 
+        } 
         
+        appendNode(current); 
+    } 
+    
+    private void appendNode(Node node) { 
+        last.next = node; 
+        node.next = null; 
+        preNodes.put(node.key, last); 
+        last = node;  
+    }
+    
+    private void removeFirstNode() {
+        Node current, next; 
+        current = dummy.next; 
+        next = current.next; 
         
+        dummy.next = next; 
+        if (dummy.next == null) {
+            last = dummy; 
+        } 
+        
+        preNodes.remove(current.key); 
+        preNodes.put(next.key, dummy); 
     }
 } 
+
 
 /* Solution 02: optimised */ 
 public class LRUCache {
