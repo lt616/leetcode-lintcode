@@ -98,3 +98,73 @@ public class Solution {
 
 
 /* Solution 02: union-find */ 
+class Solution { 
+    
+    int[] roots; 
+    int num_islands; 
+    int num_rows, num_columns; 
+    
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) { 
+            return 0; 
+        } 
+        
+        num_rows = grid.length; 
+        num_columns = grid[0].length; 
+        
+        num_islands = 0; 
+        roots = new int[grid.length * grid[0].length]; 
+        for (int i = 0;i < roots.length;i ++) {
+            roots[i] = i; 
+        } 
+        
+        for (int i = 0;i < grid.length;i ++) {
+            for (int j = 0;j < grid[0].length;j ++) {
+                if (grid[i][j] == '1') { 
+                
+                    num_islands ++; 
+                    if (isValid(i - 1, j) && grid[i - 1][j] == '1') {
+                        union(twoToOne(i - 1, j), twoToOne(i, j));   
+                    } 
+                    
+                    if (isValid(i, j - 1) && grid[i][j - 1] == '1') {
+                        union(twoToOne(i, j - 1), twoToOne(i, j)); 
+                    } 
+                } 
+            } 
+        } 
+        
+        return num_islands; 
+    } 
+    
+    private void union(int a, int b) {
+        int root_a = find(a); 
+        int root_b = find(b); 
+        
+        if (root_a == root_b) {
+            return; 
+        } 
+        num_islands --; 
+        
+        roots[root_a] = root_b; 
+    } 
+    
+    private int find(int a) {
+        if (a == roots[a]) {
+            return a; 
+        } 
+        
+        return roots[a] = find(roots[a]); 
+    } 
+    
+    private int twoToOne(int x, int y) {
+        return (x * num_columns + y); 
+    } 
+    
+    private boolean isValid(int x, int y) {
+        if (x < 0 || x >= num_rows || y < 0 || y >= num_columns) {
+            return false; 
+        } 
+        return true; 
+    }
+} 
