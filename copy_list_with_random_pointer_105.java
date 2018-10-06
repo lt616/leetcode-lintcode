@@ -25,55 +25,33 @@ Could you solve it with O(1) space?
  * };
  */
 public class Solution {
-    /**
-     * @param head: The head of linked list with a random pointer.
-     * @return: A new head of a deep copy of the list.
-     */
     public RandomListNode copyRandomList(RandomListNode head) {
-        // write your code here 
-        
         if (head == null) {
             return null; 
         } 
         
-
-        
-        copyNext(head); 
-        
-        RandomListNode res = head.next; 
-        copyRandom(head); 
-        
-        return res; 
-    } 
-    
-    private void copyNext(RandomListNode node) {
-        RandomListNode new_node = new RandomListNode(node.label); 
-        
-        RandomListNode next = node.next; 
-        node.next = new_node; 
-        new_node.next = next; 
-        
-        if (next != null) {
-            copyNext(next); 
-        } 
-    } 
-    
-    private void copyRandom(RandomListNode node) {
-        RandomListNode new_node = node.next; 
-        RandomListNode next = new_node.next; 
-        
-        if (node.random == null) {
-            new_node.random = null; 
-        } else { 
-            new_node.random = node.random.next; 
+        RandomListNode current = head; 
+        while (current != null) { 
+            RandomListNode new_node = new RandomListNode(current.label); 
+            new_node.next = current.next; 
+            current.next = new_node; 
+            current = new_node.next; 
         } 
         
-        if (next == null) {
-            new_node.next = null; 
-            return; 
-        }
+        current = head; 
+        RandomListNode new_head = head.next; 
+        while (current != null) { 
+            current.next.random = (current.random == null) ? null : current.random.next; 
+            current = current.next.next; 
+        } 
         
-        new_node.next = next.next; 
-        copyRandom(next); 
-    }
+        current = head; 
+        while (current != null) {
+            RandomListNode temp = current.next; 
+            current.next = current.next.next; 
+            temp.next = (temp.next == null) ? null : temp.next.next; 
+            current = current.next; 
+        } 
+        return new_head; 
+    } 
 } 
