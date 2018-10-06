@@ -60,4 +60,42 @@ public class Solution {
 } 
 
 
+/* Solution 02: Dynamic programming 
+                Reverse s and find the longest common substring with right index */ 
+class Solution { 
+    
+    
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 0) {
+            return ""; 
+        } 
+        
+        StringBuilder sb = new StringBuilder(); 
+        for (int i = s.length() - 1;i >= 0;i --) {
+            sb.append(s.charAt(i)); 
+        } 
+        
+        String rev_s = sb.toString(); 
+        
+        int[][] dp_array = new int[s.length() + 1][s.length() + 1]; 
+        
+        int max_len = 1, end = 0; 
+        for (int i = 1;i <= s.length();i ++) {
+            for (int j = 1;j <= rev_s.length();j ++) {
+                if (s.charAt(i - 1) == rev_s.charAt(j - 1)) {
+                    int len = dp_array[i - 1][j - 1] + 1; 
+                    if (len > max_len && i - len == s.length() - j) {
+                        max_len = len; 
+                        end = i - 1; 
+                    } 
+                    
+                    dp_array[i][j] = len; 
+                }
+            }
+        } 
+
+        return s.substring(end - max_len + 1, end + 1); 
+    } 
+} 
+
 
