@@ -30,6 +30,7 @@ You can use other method to do serializaiton and deserialization.
  */
 
 
+/* Solution 01: BFS */ 
 public class Solution {
     /**
      * This method will be invoked first, you should design your own algorithm 
@@ -120,3 +121,78 @@ public class Solution {
         return root; 
     }
 } 
+
+
+/* Solution 02: BFS (improved in format) */ 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root == null) {
+            return ""; 
+        } 
+        
+        StringBuilder sb = new StringBuilder(); 
+        Queue<TreeNode> queue = new LinkedList<TreeNode>(); 
+        queue.offer(root); 
+        
+        while (! queue.isEmpty()) {
+            TreeNode current = queue.poll(); 
+            if (current == null) {
+                sb.append("#"); 
+                sb.append(" "); 
+                continue; 
+            }
+            
+            sb.append(current.val); 
+            sb.append(" "); 
+            queue.offer(current.left); 
+            queue.offer(current.right); 
+        } 
+        
+        return sb.toString(); 
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        
+        if (data.length() == 0) {
+            return null; 
+        } 
+        
+        Queue<TreeNode> queue = new LinkedList<TreeNode>(); 
+        String[] values = data.split(" "); 
+        TreeNode root = new TreeNode(Integer.parseInt(values[0])); 
+        queue.offer(root); 
+        
+        int index = 0; 
+        while (! queue.isEmpty()) {
+            TreeNode current = queue.poll(); 
+            current.left = (values[++ index].equals("#")) ? null : new TreeNode(Integer.parseInt(values[index])); 
+            current.right = (values[++ index].equals("#")) ? null : new TreeNode(Integer.parseInt(values[index])); 
+            
+            if (current.left != null) {
+                queue.offer(current.left); 
+            } 
+            
+            if (current.right != null) {
+                queue.offer(current.right); 
+            }
+        } 
+        
+        return root; 
+    }
+}
+
+// Your Codec object will be instantiated and called as such:
+// Codec codec = new Codec();
+// codec.deserialize(codec.serialize(root));
