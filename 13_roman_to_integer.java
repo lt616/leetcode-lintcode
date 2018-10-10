@@ -41,7 +41,7 @@ class Solution {
             char c = s.charAt(i); 
             if (map.get(c) >= map.get(s.charAt(i + 1))) {
                 sum += map.get(c); 
-            } else {
+            } else { 
                 sum -= map.get(c); 
             } 
         } 
