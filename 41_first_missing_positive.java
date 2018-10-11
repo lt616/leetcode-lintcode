@@ -86,3 +86,45 @@ class Solution {
         return nums.length + 1; 
     }
 } 
+
+
+/* Solution 04: 2-pointer one pass, O(n), O(1) */ 
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 1; 
+        }  
+        
+        for (int i = 0;i < nums.length;i ++) { 
+            if (nums[i] <= 0 || nums[i] > nums.length) {
+                nums[i] = 0; 
+            } else { 
+                if (nums[i] - 1 == i) {
+                    continue; 
+                } 
+                
+                if (nums[i] - 1 > i && nums[nums[i] - 1] != nums[i]) { 
+                    swap(nums, i, nums[i] - 1); 
+                    i --;                
+                } else { 
+                    nums[nums[i] - 1] = nums[i]; 
+                    nums[i] = 0; 
+                }
+            } 
+        } 
+        
+        for (int i = 0;i < nums.length;i ++) { 
+            if (nums[i] == 0) { 
+                return i + 1; 
+            } 
+        } 
+        
+        return nums.length + 1; 
+    } 
+    
+    private void swap(int[] nums, int a, int b) {
+        int temp = nums[b]; 
+        nums[b] = nums[a]; 
+        nums[a] = temp; 
+    }
+}  
